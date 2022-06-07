@@ -4,7 +4,7 @@ import { getMovies } from 'services/movies-api';
 
 export default function GetTrendingMovies() {
   const [movies, setMovies] = useState([]);
-  const [page, setPage] = useState(1);
+  const [page] = useState(1);
 
   useEffect(() => {
     getMovies(page)
