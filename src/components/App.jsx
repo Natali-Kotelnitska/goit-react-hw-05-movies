@@ -1,11 +1,9 @@
-// import { Route } from 'react-router-dom';
-// import AppBar from './AppBar/AppBar';
-// import Container from './Container/Container';
 import { Route, Routes } from 'react-router-dom';
+// import NotFoundView from 'ui/NotFoundView';
 import Appbar from './AppBar/AppBar';
 import HomePage from './HomePage/HomePage';
+import MovieDetailsPage from './MovieDetailsPage/MovieDetailsPage';
 import SearchBar from './MoviesPage/MoviesPage';
-// import { Route, Routes } from 'react-router-dom';
 
 export const App = () => {
   return (
@@ -14,8 +12,12 @@ export const App = () => {
       {/* <SearchBar></SearchBar> */}
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
-        <Route path="movies" element={<SearchBar />}></Route>
+        <Route path="/movies" element={<SearchBar />}></Route>
+        <Route path="*" element={<HomePage />} />
+        <Route path="/movies/:movieId" element={<MovieDetailsPage />}></Route>
+        {/* <Route path="*" element={<NotFoundView />} /> */}
       </Routes>
+
       {/* <Appbar />
       <HomePage></HomePage> */}
 
