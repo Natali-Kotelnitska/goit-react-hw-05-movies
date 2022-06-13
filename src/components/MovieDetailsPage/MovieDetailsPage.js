@@ -1,5 +1,7 @@
 // import Container from 'components/Container/Container';
+import Reviews from 'components/Reviews/Reviews';
 import { useEffect, useState } from 'react';
+import { Link, Outlet, Route, Routes } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { fetchMoviesDetails } from 'services/movies-api';
 
@@ -10,7 +12,7 @@ export default function MovieDetailsPage() {
 
   useEffect(() => {
     fetchMoviesDetails(movieId).then(res => {
-      console.log(res);
+      // console.log(res);
       setMovie(res);
     });
   }, [movieId]);
@@ -20,7 +22,6 @@ export default function MovieDetailsPage() {
   return (
     <>
       <h2>Movie Review</h2>
-
       {movie && (
         <div>
           <img
@@ -40,6 +41,19 @@ export default function MovieDetailsPage() {
           </div>
         </div>
       )}
+      <hr />
+      <div>
+        <h2>Additional Information</h2>
+        <Reviews />
+        <Link to={`/movies/${movieId}/reviews`}>Reviews</Link>
+        {/* <Reviews /> */}
+        <p>Cast</p>
+      </div>
+      <hr />
+      {/* <Reviews /> */}
+      {/* <Routes>
+        {movie && <Route path="reviews" element={<Reviews />}></Route>}
+      </Routes> */}
     </>
   );
 }

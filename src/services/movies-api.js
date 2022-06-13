@@ -18,7 +18,7 @@ export const getMovies = async (page = 1) => {
     `${END_POINTS.trending}?api_key=${API_KEY}&page=${page}&language=en-US&include_adult=false`
     // `/trending/movie/week?api_key=${API_KEY}&page=${page}`
   );
-  console.log(res.data.results);
+  // console.log(res.data.results);
   return res.data.results;
 };
 
@@ -43,22 +43,29 @@ export const fetchMoviesDetails = async id => {
 };
 
 // https://api.themoviedb.org/3/movie/{movie_id}/credits?api_key=<<api_key>>&language=en-US
-export const fetchMoviesCredits = async id => {
+export const fetchMoviesCredits = async (id = 11) => {
   const res = await axios.get(
-    `/movie/${id}${END_POINTS.movieCredits}?api_key=${API_KEY}&language=en-US`
+    // `/movie/${id}${END_POINTS.movieCredits}?api_key=${API_KEY}&language=en-US`
+    `/movie/${id}${END_POINTS.movieCredits}?api_key=${API_KEY}&popularity={popularity>10}&language=en-US`
+  );
+  console.log(res.data);
+  return res.data;
+};
+
+// fetchMoviesCredits(11);
+
+// https://api.themoviedb.org/3/movie/{movie_id}/reviews?api_key=<<api_key>>&language=en-US&page=1
+
+export const fetchMoviesReviews = async (id, page = 1) => {
+  const res = await axios.get(
+    `/movie/${id}${END_POINTS.movieReviews}?api_key=${API_KEY}&language=en-US&page=${page}`
+    // `/movie/${id}${END_POINTS.movieReviews}?api_key=${API_KEY}&language=en-US&page=${page}`
   );
   console.log(res.data.results);
   return res.data.results;
 };
 
-// https://api.themoviedb.org/3/movie/{movie_id}/reviews?api_key=<<api_key>>&language=en-US&page=1
-export const fetchMoviesReviews = async (id, page = 1) => {
-  const res = await axios.get(
-    `/movie/${id}${END_POINTS.movieReviews}?api_key=${API_KEY}&language=en-US&page=${page}`
-  );
-  console.log(res.data.results);
-  return res.data.results;
-};
+// fetchMoviesReviews(11);
 
 // export const normalizeQuery = query =>
 //   query.toLowerCase().trim().split(' ').join('+');

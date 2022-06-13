@@ -20,14 +20,14 @@ const SearchBar = () => {
     if (searchQuery.trim() === '') {
       alert('Enter the film title');
     }
-    setSearchQuery('');
+    setSearchQuery(searchQuery);
   };
 
   useEffect(() => {
     // setLoading(true);
     if (!searchQuery) return;
     setMovies([]);
-    const fetchMovie = searchQuery => {
+    const fetchMovie = () => {
       setLoading(true);
       fetchByQuery(searchQuery)
         .then(results => {
