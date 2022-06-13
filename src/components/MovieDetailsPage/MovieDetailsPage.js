@@ -1,7 +1,7 @@
 // import Container from 'components/Container/Container';
 import Reviews from 'components/Reviews/Reviews';
 import { useEffect, useState } from 'react';
-import { Link, Outlet, Route, Routes } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { fetchMoviesDetails } from 'services/movies-api';
 

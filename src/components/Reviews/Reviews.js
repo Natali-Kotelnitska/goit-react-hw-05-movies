@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { fetchMoviesReviews } from 'services/movies-api';
 
 const Reviews = id => {
@@ -44,7 +44,7 @@ const Reviews = id => {
   // console.log(reviews);
   return (
     <>
-      {/* {error && <div>{error}</div>} */}
+      {error && <div>{error}</div>}
       <ul>
         {reviews.map(review => {
           console.log(review);
