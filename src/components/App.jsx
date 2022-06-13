@@ -1,6 +1,8 @@
 import { Route, Routes } from 'react-router-dom';
+import NotFoundView from 'ui/NotFoundView';
 // import NotFoundView from 'ui/NotFoundView';
 import Appbar from './AppBar/AppBar';
+import Cast from './Cast/Cast';
 // import Container from './Container/Container';
 import HomePage from './HomePage/HomePage';
 import MovieDetailsPage from './MovieDetailsPage/MovieDetailsPage';
@@ -13,17 +15,17 @@ export const App = () => {
       <Appbar />
       {/* <SearchBar></SearchBar> */}
       <Routes>
-        <Route path="/" element={<HomePage />}></Route>
+        <Route path="/" index element={<HomePage />}></Route>
         <Route path="/movies" element={<SearchBar />}></Route>
         <Route path="*" element={<HomePage />} />
-        <Route path="/movies/:movieId/*" element={<MovieDetailsPage />}>
-          <Route path="reviews" element={<Reviews />} />
-          {/* <Route path="reviews" /> */}
+        <Route path="/movies/:movieId/" element={<MovieDetailsPage />}>
+          <Route path="/movies/:movieId/reviews" element={<Reviews />} />
+          <Route path="/movies/:movieId/cast" element={<Cast />} />
         </Route>
 
-        {/* <Route path="*" element={<NotFoundView />} /> */}
+        <Route path="*" element={<NotFoundView />} />
       </Routes>
-      {/* <Reviews /> */}
+
       {/* <Appbar />
       <HomePage></HomePage> */}
 

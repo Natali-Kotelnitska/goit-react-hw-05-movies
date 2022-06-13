@@ -18,9 +18,11 @@ const SearchBar = () => {
   const handleSubmit = e => {
     e.preventDefault();
     if (searchQuery.trim() === '') {
+      // setSearchQuery('');
       alert('Enter the film title');
     }
-    setSearchQuery(searchQuery);
+
+    setSearchQuery('');
   };
 
   useEffect(() => {
@@ -31,8 +33,8 @@ const SearchBar = () => {
       setLoading(true);
       fetchByQuery(searchQuery)
         .then(results => {
-          setMovies(results);
-          // setMovies(prevState => [...prevState, ...results]);
+          // setMovies(results);
+          setMovies(prevState => [...prevState, ...results]);
         })
         .catch(error => {
           setError('Ooops. Something went wrong...');

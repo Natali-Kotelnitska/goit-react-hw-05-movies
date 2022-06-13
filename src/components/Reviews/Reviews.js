@@ -3,9 +3,8 @@ import { useParams } from 'react-router-dom';
 import { fetchMoviesReviews } from 'services/movies-api';
 
 const Reviews = id => {
-  // console.log('Render Review');
   const { movieId } = useParams();
-  // console.log(movieId);
+
   const [reviews, setReviews] = useState([]);
   const [error, setError] = useState(null);
 
@@ -20,34 +19,14 @@ const Reviews = id => {
       }
     };
     fetchReviews();
-    // fetchMoviesReviews(movieId).then(res => {
-    //   console.log(res);
-    //   setReviews(res);
-    // });
   }, [movieId]);
 
-  // useEffect(() => {
-  //   const fetchReviews = movieId => {
-  //     fetchMoviesReviews(movieId)
-  //       .then(res => {
-  //         console.log(res);
-  //         setReviews(res);
-  //       })
-  //       .catch(error => {
-  //         setError('Ooops. Something went wrong...');
-  //         console.log(error);
-  //       });
-  //   };
-  //   fetchReviews();
-  // }, [movieId]);
-
-  // console.log(reviews);
   return (
     <>
       {error && <div>{error}</div>}
       <ul>
         {reviews.map(review => {
-          console.log(review);
+          // console.log(review);
           return (
             <li key={review.id}>
               <p>Author: {review.author}</p>

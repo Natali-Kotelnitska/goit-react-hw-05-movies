@@ -35,13 +35,15 @@ export default function GetTrendingMovies() {
   //   setPage(1);
   //   setMovies([0]);
   // };
+  const isNotFound = !loading && !movies;
   return (
     <>
       <h1>Trending Movies</h1>
       {/* <SearchBar onSubmit={handleFormSubmit} /> */}
+      {loading && 'Loading ...'}
+      {isNotFound && <div>Movies not found</div>}
       {error && <div>{error}</div>}
       {movies && <MovieList movies={movies} />}
-      {loading && 'Loading ...'}
     </>
   );
 }

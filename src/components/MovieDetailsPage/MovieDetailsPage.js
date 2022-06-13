@@ -1,7 +1,7 @@
 // import Container from 'components/Container/Container';
-import Reviews from 'components/Reviews/Reviews';
+
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { fetchMoviesDetails } from 'services/movies-api';
 
@@ -21,12 +21,13 @@ export default function MovieDetailsPage() {
 
   return (
     <>
+      <button>Go back</button>
       <h2>Movie Review</h2>
       {movie && (
         <div>
           <img
             src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
-            alt="movie.title"
+            alt={movie.title}
           />
           <h3>{movie.title}</h3>
           <p>({getYear()})</p>
@@ -44,10 +45,19 @@ export default function MovieDetailsPage() {
       <hr />
       <div>
         <h2>Additional Information</h2>
-        <Reviews />
-        <Link to={`/movies/${movieId}/reviews`}>Reviews</Link>
+        <Link to={`/movies/${movieId}/reviews`}>
+          <p>Reviews</p>
+        </Link>
+
+        <Link to={`/movies/${movieId}/cast`}>
+          <p>Cast</p>
+        </Link>
+        <hr />
+        <Outlet />
+        {/* <Link to={<Reviews />}>Review</Link> */}
         {/* <Reviews /> */}
-        <p>Cast</p>
+        {/* <Link to={`/movies/${movieId}/reviews`}>Reviews</Link> */}
+        {/* <Reviews /> */}
       </div>
       <hr />
       {/* <Reviews /> */}

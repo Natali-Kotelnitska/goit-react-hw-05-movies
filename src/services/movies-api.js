@@ -46,13 +46,13 @@ export const fetchMoviesDetails = async id => {
 export const fetchMoviesCredits = async (id = 11) => {
   const res = await axios.get(
     // `/movie/${id}${END_POINTS.movieCredits}?api_key=${API_KEY}&language=en-US`
-    `/movie/${id}${END_POINTS.movieCredits}?api_key=${API_KEY}&popularity={popularity>10}&language=en-US`
+    `/movie/${id}${END_POINTS.movieCredits}?api_key=${API_KEY}&language=en-US`
   );
-  console.log(res.data);
-  return res.data;
+  console.log(res);
+  return res.data.cast;
 };
 
-// fetchMoviesCredits(11);
+fetchMoviesCredits(11);
 
 // https://api.themoviedb.org/3/movie/{movie_id}/reviews?api_key=<<api_key>>&language=en-US&page=1
 
