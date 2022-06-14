@@ -1,3 +1,4 @@
+import Container from 'components/Container/Container';
 import MovieList from 'components/TrendingMovies/MovieList';
 import { useEffect, useState } from 'react';
 import { fetchByQuery } from 'services/movies-api';
@@ -47,7 +48,26 @@ const SearchBar = () => {
 
   return (
     <>
-      <h1>Movies search</h1>
+      <Container>
+        <h1>Movies search</h1>
+
+        {loading && 'Loading ...'}
+        {error && <div>{error}</div>}
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="searchQuery"
+            value={searchQuery}
+            autoComplete="off"
+            autoFocus
+            placeholder="Search movies"
+            onChange={handleQuerySearch}
+          />
+          <button type="submit">Search</button>
+        </form>
+        {movies && <MovieList movies={movies} />}
+      </Container>
+      {/* <h1>Movies search</h1>
 
       {loading && 'Loading ...'}
       {error && <div>{error}</div>}
@@ -63,7 +83,7 @@ const SearchBar = () => {
         />
         <button type="submit">Search</button>
       </form>
-      {movies && <MovieList movies={movies} />}
+      {movies && <MovieList movies={movies} />} */}
     </>
   );
 };

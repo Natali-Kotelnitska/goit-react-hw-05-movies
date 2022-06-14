@@ -1,4 +1,5 @@
 // import SearchBar from 'components/MoviesPage/MoviesPage';
+import Container from 'components/Container/Container';
 import MovieList from 'components/TrendingMovies/MovieList';
 import { useEffect, useState } from 'react';
 import { getMovies } from 'services/movies-api';
@@ -38,12 +39,14 @@ export default function GetTrendingMovies() {
   const isNotFound = !loading && !movies;
   return (
     <>
-      <h1>Trending Movies</h1>
-      {/* <SearchBar onSubmit={handleFormSubmit} /> */}
-      {loading && 'Loading ...'}
-      {isNotFound && <div>Movies not found</div>}
-      {error && <div>{error}</div>}
-      {movies && <MovieList movies={movies} />}
+      <Container>
+        <h1>Trending Movies</h1>
+        {/* <SearchBar onSubmit={handleFormSubmit} /> */}
+        {loading && 'Loading ...'}
+        {isNotFound && <div>Movies not found</div>}
+        {error && <div>{error}</div>}
+        {movies && <MovieList movies={movies} />}
+      </Container>
     </>
   );
 }
