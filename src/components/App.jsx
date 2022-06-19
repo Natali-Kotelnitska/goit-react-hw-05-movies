@@ -37,9 +37,8 @@ export const App = () => {
             <Route path="/movies/:movieId/cast" element={<Cast />} />
           </Route>
 
-          <Route path="*" element={<NotFoundView />} />
-          {/* або повернення на HomePage */}
-          {/* <Route path="*" element={<HomePage />} /> */}
+          {/* <Route path="*" element={<NotFoundView />} /> */}
+          <Route path="*" element={<HomePage />} />
         </Routes>
       </Suspense>
     </>
