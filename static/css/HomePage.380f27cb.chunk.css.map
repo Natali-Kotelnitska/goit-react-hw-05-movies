@@ -1,1 +1,0 @@
-{"version":3,"file":"static/css/HomePage.380f27cb.chunk.css","mappings":"AAAA,4BAEE,gBAAiB,CACjB,iBAAkB,CAFlB,gBAAiB,CAGjB,iBAAkB,CAClB,kBACF","sources":["components/Container/Container.module.css"],"sourcesContent":[".container {\n  max-width: 1170px;\n  margin-left: auto;\n  margin-right: auto;\n  padding-left: 15px;\n  padding-right: 15px;\n}\n"],"names":[],"sourceRoot":""}
