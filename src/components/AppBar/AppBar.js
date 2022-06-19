@@ -1,10 +1,13 @@
 import s from './AppBar.module.css';
 import Navigation from 'components/Navigation/Navigation';
+import Container from 'components/Container/Container';
 
 export default function Appbar() {
   return (
     <header className={s.header}>
-      <Navigation />
+      <Container>
+        <Navigation />
+      </Container>
     </header>
   );
 }

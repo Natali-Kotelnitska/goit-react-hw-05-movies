@@ -1,30 +1,55 @@
 // import Container from 'components/Container/Container';
-
+import s from './MovieDetailsPage.module.css';
 import Container from 'components/Container/Container';
 import { useEffect, useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { fetchMoviesDetails } from 'services/movies-api';
+import { createBrowserHistory } from 'history';
+import PageHeading from 'components/Pageheading/Pageheading';
 
 export default function MovieDetailsPage() {
-  const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
-  console.log(movieId);
-
-  useEffect(() => {
-    fetchMoviesDetails(movieId).then(res => {
-      // console.log(res);
-      setMovie(res);
-    });
-  }, [movieId]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const getYear = () => new Date(movie.release_date).getFullYear();
+
+  const { movieId } = useParams();
+  let history = createBrowserHistory();
+
+  let activeClassName = {
+    color: '#2196f3',
+  };
+
+  const handleClick = () => {
+    history.back();
+    // history.forward();
+  };
+
+  useEffect(() => {
+    setLoading(true);
+    fetchMoviesDetails(movieId)
+      .then(res => {
+        setMovie(res);
+      })
+      .catch(error => {
+        setError('Ooops. Something went wrong...');
+        console.log(error);
+      })
+      .finally(() => setLoading(false));
+  }, [movieId]);
 
   return (
     <>
       <Container>
-        <button>Go back</button>
-        <h2>Movie Review</h2>
+        <button onClick={handleClick} className={s.backButton}>
+          Go back
+        </button>
+        {movie && <PageHeading text={movie.title} />}
+        {/* <h2>Movie Review</h2> */}
+        {loading && 'Loading ...'}
+        {error && <div>{error}</div>}
         {movie && (
           <div>
             <img
@@ -38,30 +63,27 @@ export default function MovieDetailsPage() {
               <h3>Overview</h3>
               <p>{movie.overview}</p>
             </div>
-            <div>
-              <p>Genres</p>
-              {/* <p>{movie.genres}</p> */}
-            </div>
           </div>
         )}
         <hr />
         <div>
           <h2>Additional Information</h2>
-          <Link to={`/movies/${movieId}/reviews`}>
-            <p>Reviews</p>
-          </Link>
+          <NavLink
+            to={`/movies/${movieId}/reviews`}
+            style={({ isActive }) => (isActive ? activeClassName : undefined)}
+          >
+            <p className={s.reviews}>Reviews</p>
+          </NavLink>
 
-          <Link to={`/movies/${movieId}/cast`}>
-            <p>Cast</p>
-          </Link>
+          <NavLink
+            to={`/movies/${movieId}/cast`}
+            style={({ isActive }) => (isActive ? activeClassName : undefined)}
+          >
+            <p className={s.cast}>Cast</p>
+          </NavLink>
           <hr />
           <Outlet />
-          {/* <Link to={<Reviews />}>Review</Link> */}
-          {/* <Reviews /> */}
-          {/* <Link to={`/movies/${movieId}/reviews`}>Reviews</Link> */}
-          {/* <Reviews /> */}
         </div>
-        <hr />
       </Container>
     </>
   );

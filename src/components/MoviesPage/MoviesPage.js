@@ -1,7 +1,9 @@
+import s from './MoviesPage.module.css';
 import Container from 'components/Container/Container';
 import MovieList from 'components/TrendingMovies/MovieList';
 import { useEffect, useState } from 'react';
 import { fetchByQuery } from 'services/movies-api';
+import PageHeading from 'components/Pageheading/Pageheading';
 const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [movies, setMovies] = useState('');
@@ -12,7 +14,6 @@ const SearchBar = () => {
   //   searchQuery.toLowerCase().trim().split(' ').join('+');
 
   const handleQuerySearch = e => {
-    // console.log(e.target.value);
     setSearchQuery(e.target.value.toLowerCase());
   };
 
@@ -27,21 +28,20 @@ const SearchBar = () => {
   };
 
   useEffect(() => {
-    // setLoading(true);
     if (!searchQuery) return;
     setMovies([]);
     const fetchMovie = () => {
       setLoading(true);
       fetchByQuery(searchQuery)
         .then(results => {
-          // setMovies(results);
-          setMovies(prevState => [...prevState, ...results]);
+          setMovies(results);
+          // setMovies(prevState => [...prevState, ...results]);
         })
         .catch(error => {
           setError('Ooops. Something went wrong...');
           console.log(error);
         })
-        .finally(() => setLoading(false));
+        .finally(setLoading(false));
     };
     fetchMovie();
   }, [searchQuery]);
@@ -49,41 +49,27 @@ const SearchBar = () => {
   return (
     <>
       <Container>
-        <h1>Movies search</h1>
-
+        <PageHeading text={'Movie Search'} />
+        {/* <h1>Movies search</h1> */}
         {loading && 'Loading ...'}
         {error && <div>{error}</div>}
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className={s.searchForm}>
           <input
             type="text"
             name="searchQuery"
             value={searchQuery}
             autoComplete="off"
             autoFocus
-            placeholder="Search movies"
+            placeholder="Search ..."
             onChange={handleQuerySearch}
+            className={s.searchInput}
           />
-          <button type="submit">Search</button>
+          <button type="submit" className={s.searchButton}>
+            Search
+          </button>
         </form>
         {movies && <MovieList movies={movies} />}
       </Container>
-      {/* <h1>Movies search</h1>
-
-      {loading && 'Loading ...'}
-      {error && <div>{error}</div>}
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="searchQuery"
-          value={searchQuery}
-          autoComplete="off"
-          autoFocus
-          placeholder="Search movies"
-          onChange={handleQuerySearch}
-        />
-        <button type="submit">Search</button>
-      </form>
-      {movies && <MovieList movies={movies} />} */}
     </>
   );
 };

@@ -1,4 +1,3 @@
-// import { Suspense } from 'react';
 import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import NotFoundView from 'ui/NotFoundView';
@@ -43,22 +42,6 @@ export const App = () => {
           {/* <Route path="*" element={<HomePage />} /> */}
         </Routes>
       </Suspense>
-
-      {/* <Appbar />
-      <HomePage></HomePage> */}
-
-      {/* <Route path="/" element={<AppBar />}> */}
-      {/* <Route path = '/' element={<Layout/>} 
-          <Route path='create' element={<ListPage/>
-          <Route path='*' element={<NotFoundPage/>*/}
-      {/* </Route>
-     
-      {/* <Container> */}
-      {/* <AppBar /> */}
-
-      {/* <Route>HomePage</Route> */}
-      {/* </Container> */}
-      {/* React homework template */}
     </>
   );
 };

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchMoviesReviews } from 'services/movies-api';
 
-const Reviews = id => {
+const Reviews = () => {
   const { movieId } = useParams();
 
   const [reviews, setReviews] = useState([]);

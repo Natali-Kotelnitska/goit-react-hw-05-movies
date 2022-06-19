@@ -1,9 +1,10 @@
 // img, name, character (list)
+import s from './Cast.module.css';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchMoviesCredits } from 'services/movies-api';
 
-const Cast = id => {
+const Cast = () => {
   const { movieId } = useParams();
 
   const [cast, setCast] = useState([]);
@@ -15,7 +16,6 @@ const Cast = id => {
       try {
         setLoading(true);
         const res = await fetchMoviesCredits(movieId);
-        // const normData = res.slice(0, 5);
         setCast(res);
       } catch (error) {
         setError('Ooops. Something went wrong...');
@@ -30,11 +30,10 @@ const Cast = id => {
     <>
       {loading && 'Loading...'}
       {error && <div>{error}</div>}
-      <ul>
+      <ul className={s.castList}>
         {cast.map(castItem => {
-          //   console.log(castItem);
           return (
-            <li key={castItem.id}>
+            <li key={castItem.id} className={s.castItem}>
               <img
                 src={`https://image.tmdb.org/t/p/w300${castItem.profile_path}`}
                 alt={`${castItem.name} portrait`}

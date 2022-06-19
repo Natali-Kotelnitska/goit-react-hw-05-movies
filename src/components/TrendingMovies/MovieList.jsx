@@ -1,10 +1,7 @@
-// import { useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
 const MovieList = ({ movies }) => {
-  // const match = useMatch();
-  // console.log(match);
-  // const { movieId } = useParams();
   return (
     <>
       <ul>
@@ -16,9 +13,11 @@ const MovieList = ({ movies }) => {
           </li>
         ))}
       </ul>
-      <hr />
     </>
   );
 };
 
+MovieList.propTypes = {
+  movies: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+};
 export default MovieList;

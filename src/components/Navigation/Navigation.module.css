@@ -13,6 +13,6 @@
 }
 
 /* .activeLink {
-  /* composes: link; */
-/* color: #2196f3; */
-/* } */
+  composes: link;
+  color: #2196f3;
+} */
