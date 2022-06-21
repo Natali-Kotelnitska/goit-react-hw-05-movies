@@ -1,11 +1,10 @@
-// import Container from 'components/Container/Container';
 import s from './MovieDetailsPage.module.css';
 import Container from 'components/Container/Container';
 import { useEffect, useState } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { fetchMoviesDetails } from 'services/movies-api';
-import { createBrowserHistory } from 'history';
+// import { createBrowserHistory } from 'history';
 import PageHeading from 'components/Pageheading/Pageheading';
 
 export default function MovieDetailsPage() {
@@ -16,16 +15,18 @@ export default function MovieDetailsPage() {
   const getYear = () => new Date(movie.release_date).getFullYear();
 
   const { movieId } = useParams();
-  let history = createBrowserHistory();
+  // let history = createBrowserHistory();
+  const location = useLocation();
+  const navigate = useNavigate();
+  console.log(location);
 
   let activeClassName = {
     color: '#2196f3',
   };
 
-  const handleClick = () => {
-    history.back();
-    // history.forward();
-  };
+  const handleClick = () => navigate(location?.state?.from ?? '/');
+  // history.back();
+  // history.forward();
 
   useEffect(() => {
     setLoading(true);
@@ -46,6 +47,7 @@ export default function MovieDetailsPage() {
         <button onClick={handleClick} className={s.backButton}>
           Go back
         </button>
+
         {movie && <PageHeading text={movie.title} />}
         {/* <h2>Movie Review</h2> */}
         {loading && 'Loading ...'}
@@ -71,6 +73,7 @@ export default function MovieDetailsPage() {
           <NavLink
             to={`/movies/${movieId}/reviews`}
             style={({ isActive }) => (isActive ? activeClassName : undefined)}
+            state={location.state}
           >
             <p className={s.reviews}>Reviews</p>
           </NavLink>
@@ -78,6 +81,7 @@ export default function MovieDetailsPage() {
           <NavLink
             to={`/movies/${movieId}/cast`}
             style={({ isActive }) => (isActive ? activeClassName : undefined)}
+            state={location.state}
           >
             <p className={s.cast}>Cast</p>
           </NavLink>

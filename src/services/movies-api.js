@@ -43,16 +43,16 @@ export const fetchMoviesDetails = async id => {
 };
 
 // https://api.themoviedb.org/3/movie/{movie_id}/credits?api_key=<<api_key>>&language=en-US
-export const fetchMoviesCredits = async (id = 11) => {
+export const fetchMoviesCredits = async id => {
   const res = await axios.get(
     // `/movie/${id}${END_POINTS.movieCredits}?api_key=${API_KEY}&language=en-US`
     `/movie/${id}${END_POINTS.movieCredits}?api_key=${API_KEY}&language=en-US`
   );
-  console.log(res);
+  // console.log(res);
   return res.data.cast;
 };
 
-fetchMoviesCredits(11);
+// fetchMoviesCredits(11);
 
 // https://api.themoviedb.org/3/movie/{movie_id}/reviews?api_key=<<api_key>>&language=en-US&page=1
 
