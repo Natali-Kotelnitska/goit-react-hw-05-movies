@@ -13,6 +13,9 @@ import Appbar from './AppBar/AppBar';
 const HomePage = lazy(() =>
   import('./HomePage/HomePage' /* webpackChunkName: "HomePage" */)
 );
+// const MoviesPage = lazy(() =>
+//   import('../views/MoviesPage' /* webpackChunkName: "MoviesPage" */)
+// );
 const MoviesPage = lazy(() =>
   import('../views/MoviesPage' /* webpackChunkName: "MoviesPage" */)
 );
